@@ -1,0 +1,122 @@
+% xelatex
+\documentclass[11pt,a4paper]{article}
+\usepackage{polyglossia}
+\usepackage{fontspec}
+\usepackage{subfig}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage[round]{natbib}
+
+% natbib link joining; somewhat breaks \cite, \citet
+\makeatletter
+\renewcommand\hyper@natlinkbreak[2]{#1}
+\makeatother
+
+\usepackage{geometry}
+\geometry{%
+	includeheadfoot,
+	margin=1in
+}
+
+\def\TODO{{\bf ??? }}
+
+\title{Question Answering Survey (Preliminary)}
+\author{Petr Baudiš}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}%
+	We explore state-of-art methods in factoid question answering.
+	Since the last surveys in 2008 and 2011, the landscape changed
+	significantly, from IBM Watson DeepQA to exploding usage of
+	distributed representations.
+\end{abstract}
+
+\vspace{3ex}
+
+\textbf{%
+Note that this text represents informal notes quickly jotted down while browsing
+the literature, not a precisely formulated publication worthy material.
+}
+However, it is meant to evolve into a full survey to be published, so please
+consider citing it (by its title, \url{https://github.com/brmson/qa-survey}
+and date of retrieval) if you rely on it extensively or cite pieces of
+the summaries. \textit{Legally, the licence of this code is currently CC-BY-SA 3.0.}
+
+Basic division:  Querying for answers on structured knowledge bases,
+finding answers in unstructured (text) data.
+
+\section{Structured Data}
+
+Benchmark:  WebQuestions (pre-determined splits), TREC (various years, curated version, \dots), WikiAnswers.
+
+Measure: Precision, p@1, recall, F1
+
+Bordes et al. \cite{Semantic2014Bordes} sums up:
+\textit{%
+The state-of-the-art techniques in open QA can be classified into two main
+classes, namely, information retrieval based and semantic parsing based. Information
+retrieval systems first retrieve a broad set of candidate answers by querying
+the search API of KBs with a transformation of the question into a valid
+query and then use fine-grained detection heuristics to identify the exact answer
+(Kolomiyets survey 2011, Unger et al. 2012 templates, \cite{TreeFreebase2014Yao}).
+On the other hand, semantic parsing methods focus on the correct
+interpretation of the meaning of a question by a semantic parsing system. A
+correct interpretation converts a question into the exact database query that
+returns the correct answer. Interestingly, recent works \cite{Semantic2013Berant} \cite{SPBerant2014Paraphrase} \cite{OQA} have shown that
+such systems can be efficiently trained under indirect and imperfect supervision
+and hence scale to large-scale regimes, while bypassing most of the annotation
+costs.}
+
+These two approaches (IE vs. SP) have been further compared in \cite{FreebaseQA2014Yao}
+and seem roughly comparable.
+
+\subsection{IE For Structued Data}
+
+\textbf{Information Extraction over Structured Data: Question Answering with Freebase (Jacana Freebase)} \cite{TreeFreebase2014Yao}
+	--- TODO.
+		Open source.
+
+\textbf{Lean Question Answering over Freebase from Scratch (kitt.ai)} \cite{LeanFreebaseYao}
+	--- simple fuzzy string matching to identify Freebase concepts,
+		bag-of-words logistic regression to identify relations.
+		WebQuestions F1 Berant 44.3\%, F1 Yao 53.5\%.
+
+\subsection{SP For Structured Data}
+
+\textbf{Open Question Answering Over Curated and Extracted Knowledge Bases (OQA)} \cite{OQA}
+	--- paraphrase (mined operators) $\to$ parse (templates) $\to$ rewrite (mined operators) $\to$ execute (ensemble of KBs).
+	Novel machine learning for inference and answer scoring with hidden variables.
+	Datasets public, open source.
+	WebQuestions F1 35\%, TREC F1 29\%, WikiAnswers F1 8\%.
+
+\textbf{(Paralex)}
+
+\textbf{(SEMPRE)}
+
+\section{Unstructured Data}
+
+\textbf{(DeepQA IBM Watson)}
+
+\textbf{(Jacana)}
+
+\textbf{Web-based Question Answering: Revisiting AskMSR (AskMSR+)}
+
+\textbf{Open Domain Question Answering via Semantic Enrichment (QuASE)} \cite{QuASE}
+	--- web-based QA system that links snippet pieces to Freebase entities
+	\textit{(entity linking)} to generate extra features for answers.
+	One feature is the cosine similarity of word
+	vectors corresponding to question (and web-fetched question support)
+	and answer's textual propreties (like \textit{description}) in Freebase
+	(N.B. word frequency vectors, not embeddings!).
+	Another feature is probabilistic type matching by bag of words Bayes model
+	with Perplexity.  Generative mixture model with Dirichlet priors is used
+	for answer scoring.  Compared to naive web search baseline, TREC F1
+	improvement was 3.5\%.  (Absolute numbers not comparable due to
+	sub-sampling and re-evaluation.)
+
+\bibliographystyle{plainnat}
+\bibliography{qa}
+
+\end{document}
