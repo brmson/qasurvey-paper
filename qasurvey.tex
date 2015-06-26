@@ -97,6 +97,42 @@ and seem roughly comparable.
 
 \section{Unstructured Data}
 
+When dealing with question answering on top of unstructured data,
+two research directions exist: aside of generating a crisp answer,
+\textit{Answer Sentence Selection} is a popular sub-task%
+\footnote{\url{http://aclweb.org/aclwiki/index.php?title=Question_Answering_\%28State_of_the_art\%29}}
+where instead of the answer, just an appropriate answer-bearing passage
+is to be returned to the user.
+
+\subsection{Answer Sentence Selection}
+
+Binary classification or ranking problem.
+TODO TREC-based dataset by Wang et al.
+MAP and MRR reported.
+
+\textbf{(Jacana)} \cite{TreeEdit2013Yao}
+
+\textbf{Deep Learning for Answer Sentence Selection} \cite{Yu2014Deep}
+	--- given vector embeddings $\mathbf{q}, \mathbf{a}$, estimate
+	$P(rel|q,a) = \sigma(\mathbf{q}^T \mathbf{M}\, \mathbf{a} + b)$
+	i.e.\ train a model with parameters $\mathbf{M}, b$ that
+	generates a likely question embedding using $\mathbf{M}\, \mathbf{a}$
+	and then using dot-product measures its distance to the posed question.
+	Cross entropy over all QA pairs is used as the loss function for training.
+	Off-the-shelf $d=50$ distributed representations by Collobert and Weston 2008
+	are used as word embeddings.
+	To generate compositional embeddings,
+	a simple unigram model that averages the embeddings is the baseline;
+	as a small ($\Delta 0.02$) improvement, bigram model is proposed that uses a CNN
+	on the sentence with a bigram convolutional layer and an average-pooling layer.
+	To deal with numbers and proper nouns, a token co-occurrence counter
+	feature is also used; the learnt method gives $\Delta 0.125$ against this baseline.
+	TREC MAP 0.7113, MRR 0.7846.
+
+\subsection{Precise Answer Production}
+
+TREC benchmark.  Curated TREC.  WebQuestions also possible(?).
+
 \textbf{(DeepQA IBM Watson)} \cite{WatsonOverview}
 
 \textbf{(Jacana)} \cite{TreeEdit2013Yao} \cite{TreeEditIR2013Yao}
@@ -115,6 +151,16 @@ and seem roughly comparable.
 	for answer scoring.  Compared to naive web search baseline, TREC F1
 	improvement was 3.5\%.  (Absolute numbers not comparable due to
 	sub-sampling and re-evaluation.)
+
+\textbf{YodaQA: A Modular Question Answering System Pipeline} \cite{YodaQAPoster2015}
+
+\textbf{MemNets} though I still think it's a toy task in QA context.
+
+\section{Hybrid Systems}
+
+Full-scale end-to-end systems combining structured and unstructured approaches.
+
+\textbf{(DeepQA IBM Watson)} \cite{WatsonOverview}
 
 \textbf{YodaQA: A Modular Question Answering System Pipeline} \cite{YodaQAPoster2015}
 
