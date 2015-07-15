@@ -156,6 +156,39 @@ TREC benchmark.  Curated TREC.  WebQuestions also possible(?).
 
 \textbf{MemNets} though I still think it's a toy task in QA context.
 
+\section{Auxiliary Tasks}
+
+\subsection{Question Classification}
+
+In datasets which ask mostly uniform types of answers (e.g. WebQuestions,
+where the answer is always an entity), it may be possible to use the same
+set of features to produce and score answers across all questions.
+However, e.g.\ in the TREC dataset, types of answers vary widely and
+different strategies might be appropriate (even if they are to be machine
+learned rather than hardcoded, as was common in the early systems).
+
+One approach is to classify an answer to a fixed set of categories.
+A two-level (coarse, fine) taxonomy based on the TREC set of questions and a labelled dataset%
+\footnote{\url{http://cogcomp.cs.illinois.edu/Data/QA/QC/}}
+was introduced by \textbf{Learning question classifiers} \cite{QCLearning}.
+They set a baseline of coarse $P_1=91.0\%$, fine $P_1=84.2\%$.
+
+This sentence classification problem has been one of the standard benchmarks
+for semantic NLP tasks:
+\begin{itemize}
+	\item SVM$_S$ (Silva et al., 2011) TODO coarse $P_1=95.0\%$
+	\item DCNN (Kalchbrenner et al., 2014) TODO coarse $P_1=93.0\%$
+	\item CNN \cite{CNNSentClass} coarse $P_1=93.6\%$
+	\item Skip-Thought Vectors \cite{SkipThought} coarse $P_1=92.2\%$ (but unsupervised)
+	\item Self-Adaptive Hierarchical Sentence Model \cite{AdaSent} (AdaSent) coarse $P_1=92.6\%$
+	\item TODO more papers; \cite{AdaSent} has some references; separate embedding and classical?, supervised and unsupervised; even primitive baseline is something like $85\%$
+\end{itemize}
+
+A different approach that was introduced by IBM Watson DeepQA \cite{WatsonTyCor}
+associates the question with a Lexical Answer Type (LAT) which is
+an arbitrary English word that would describe the answer concept
+(e.g. ``inventor'' or ``length'').
+
 \section{Hybrid Systems}
 
 Full-scale end-to-end systems combining structured and unstructured approaches.
