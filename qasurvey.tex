@@ -202,6 +202,23 @@ paraphrase of \textit{capital of Christians}, aside of database lookups.
 	with composing via RNN or an averaging baseline, embeddings of
 	concepts are pre-trained from wikipedia intros and wordnet definitions.
 
+\subsection{Cloze-style Questions}
+
+In the Cloze procedure scenario \cite{Cloze},
+we consider a $(context, query)$ pair where the query
+sentence is entailed by the context, but a single entity name in the query
+is missing (e.g.\ in a context detailing an incident of the well-known personality
+\textit{Jeremy Clarkson}, we are to find $X$ for the query
+\textit{Producer X will not press charges against Jeremy Clarkson, his lawyer says.}).
+
+\textbf{Teaching Machines to Read and Comprehend} \cite{ReadAndComprehend}
+	--- an attention-based model that produces vector embeddings of $(document, query)$
+	pairs and uses a weight matrix to judge probability of a particular
+	word being the answer based on the composite pair embedding;
+	the paper is not clear on the particulars, unfortunately.
+	Three composite vector embedding models are considered,
+	based on bi-directional LSTM and convolution-ish architectures.
+
 \section{Hybrid Systems}
 
 Full-scale end-to-end systems combining structured and unstructured approaches.
