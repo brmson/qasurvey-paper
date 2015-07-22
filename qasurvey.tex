@@ -189,6 +189,19 @@ associates the question with a Lexical Answer Type (LAT) which is
 an arbitrary English word that would describe the answer concept
 (e.g. ``inventor'' or ``length'').
 
+\subsection{Answers by Paraphrasing}
+
+Many questions ask essentially for a paraphrase of the term under
+question --- for example, the question ``Who is a plumber?'' wants
+to find out a description of \textit{plumber} without using these
+words, while ``What is the capital of Christians?'' may seek the
+paraphrase of \textit{capital of Christians}, aside of database lookups.
+
+\textbf{Learning to Understand Phrases by Embedding the Dictionary (DefGen)} \cite{DefGen}
+	--- reverse dictionary and QA on crossword puzzles using word2vec
+	with composing via RNN or an averaging baseline, embeddings of
+	concepts are pre-trained from wikipedia intros and wordnet definitions.
+
 \section{Hybrid Systems}
 
 Full-scale end-to-end systems combining structured and unstructured approaches.
