@@ -189,6 +189,21 @@ associates the question with a Lexical Answer Type (LAT) which is
 an arbitrary English word that would describe the answer concept
 (e.g. ``inventor'' or ``length'').
 
+\subsection{Entity Linking}
+
+When a question is analyzed, one of the main tasks is typically recognition
+of entity mentions in the question text.  The system should process all
+varions of ``When did John F. Kennedy die?'', ``When did JFK die?'',
+``When did Kennedy die?'' and ``Wehn did Kenndey die?''.  An intelligent
+system needs to correctly link entities using aliases or ambiguous
+references and stay resistant to typos.
+
+\textbf{Improving Entity Linking using Surface Form Refinement}
+
+\url{http://nlp.cs.rpi.edu/kbp/2014/elreading.html}
+
+TODO \dots
+
 \subsection{Answers by Paraphrasing}
 
 Many questions ask essentially for a paraphrase of the term under
